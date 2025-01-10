@@ -39,6 +39,7 @@
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -93,27 +94,16 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="UploadRecordsQueue" sap:VirtualizedContainerService.HintSize="807.3333333333333,1490.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_AuxReporteMaestro">
-        <Variable.Default>
-          <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14" xml:space="preserve">new DataTable
-{
-	Columns = {
-		{"Numero del Proveedor", typeof(string)}
-	}
-}</CSharpValue>
-        </Variable.Default>
-      </Variable>
-    </Sequence.Variables>
+  <Sequence DisplayName="UploadRecordsQueue" sap:VirtualizedContainerService.HintSize="1794.6666666666667,1545.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Cargando colas" sap:VirtualizedContainerService.HintSize="480.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1">
+    <ui:LogMessage DisplayName="Log Message - Cargando colas" sap:VirtualizedContainerService.HintSize="460,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
           <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">UiPath.Core.Activities.LogLevel.Trace</CSharpValue>
@@ -125,19 +115,17 @@
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <Assign DisplayName="Assign - Mantener sólo la columna Numero de Proveedor" sap:VirtualizedContainerService.HintSize="480.6666666666667,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Assign - Referencia en transacción" sap:VirtualizedContainerService.HintSize="460,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataTable">
-          <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">dt_AuxReporteMaestro</CSharpReference>
+        <OutArgument x:TypeArguments="x:String">
+          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">in_dt_Clientes.Columns["IDENTIFICACION"].ColumnName</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataTable">
-          <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">new DataView(in_dt_Clientes).ToTable("Selected", false, "Numero del Proveedor", "Id")</CSharpValue>
-        </InArgument>
+        <InArgument x:TypeArguments="x:String">REFERENCE</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:RetryScope DisplayName="Retry Scope - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="480.6666666666667,947.3333333333334" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3" RetryInterval="00:00:05">
+    <ui:RetryScope DisplayName="Retry Scope - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="460,947.3333333333334" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3" RetryInterval="00:00:05">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
           <TryCatch DisplayName="Try Catch - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="418,736.6666666666666" sap2010:WorkflowViewState.IdRef="TryCatch_1">
@@ -145,7 +133,7 @@
               <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Bulk Add Queue Items - Registros Reporte Maestro" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1">
                 <ui:BulkAddQueueItems.QueueItemsDataTable>
                   <InArgument x:TypeArguments="sd:DataTable">
-                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">dt_AuxReporteMaestro</CSharpValue>
+                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">in_dt_Clientes</CSharpValue>
                   </InArgument>
                 </ui:BulkAddQueueItems.QueueItemsDataTable>
                 <ui:BulkAddQueueItems.QueueName>
@@ -212,14 +200,14 @@
         <ActivityFunc x:TypeArguments="x:Boolean" />
       </ui:RetryScope.Condition>
     </ui:RetryScope>
-    <ui:ClearDataTable DisplayName="Clear Data Table - Limpiar tabla Aux" sap:VirtualizedContainerService.HintSize="480.6666666666667,82" sap2010:WorkflowViewState.IdRef="ClearDataTable_1">
+    <ui:ClearDataTable DisplayName="Clear Data Table - Limpiar tabla" sap:VirtualizedContainerService.HintSize="460,114" sap2010:WorkflowViewState.IdRef="ClearDataTable_1">
       <ui:ClearDataTable.DataTable>
         <InOutArgument x:TypeArguments="sd:DataTable">
-          <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">dt_AuxReporteMaestro</CSharpReference>
+          <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">in_dt_Clientes</CSharpReference>
         </InOutArgument>
       </ui:ClearDataTable.DataTable>
     </ui:ClearDataTable>
-    <ui:LogMessage DisplayName="Log Message - Transacciones cargadas en cola" sap:VirtualizedContainerService.HintSize="480.6666666666667,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3">
+    <ui:LogMessage DisplayName="Log Message - Transacciones cargadas en cola" sap:VirtualizedContainerService.HintSize="460,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_3">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
           <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">UiPath.Core.Activities.LogLevel.Info</CSharpValue>
@@ -227,7 +215,7 @@
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">"Se ha cargado exitosamente " + in_dt_Clientes.Rows.Count + " las transacciones a la cola."</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">"Se ha cargado exitosamente las transacciones en la cola."</CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
