@@ -1,5 +1,5 @@
 {
-  "name": "gau-rpa-chapter-rodriguezdayana-dispatcher",
+  "name": "UiPath_RPA_DayanaRodriguez-dispatcher",
   "projectId": "e016734b-6c67-43ad-87fe-80f7cb235bf4",
   "description": "Dispatcher del proceso de Categorías Proveedor SRI, depura archivo Reporte Maestro, inserta en DataService y carga transacciones a la cola.",
   "main": "Main.xaml",
