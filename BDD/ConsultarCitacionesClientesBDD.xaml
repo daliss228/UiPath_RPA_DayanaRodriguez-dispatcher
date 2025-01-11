@@ -4,6 +4,7 @@
     <x:Property Name="in_BDDTableNameAMT" Type="InArgument(x:String)" />
     <x:Property Name="out_dt_Clientes" Type="OutArgument(sd:DataTable)" />
     <x:Property Name="out_numRegistros" Type="OutArgument(x:Int32)" />
+    <x:Property Name="in_ObtenerCantidadRegistrosBDD" Type="InArgument(x:Int32)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
   <sap:VirtualizedContainerService.HintSize>2152,1413.3333333333333</sap:VirtualizedContainerService.HintSize>
@@ -100,7 +101,10 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ConsultarCitacionesClientesBDD" sap:VirtualizedContainerService.HintSize="1794.6666666666667,1435.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ConsultarCitacionesClientesBDD" sap:VirtualizedContainerService.HintSize="1856.6666666666667,1552.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strQueryBDD" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -113,6 +117,18 @@
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
+    <Assign DisplayName="Assign - Query BDD" sap:VirtualizedContainerService.HintSize="492,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">
+          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">strQueryBDD</CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_26" xml:space="preserve">in_ObtenerCantidadRegistrosBDD == 0 ? "SELECT IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND IDENTIFICACION != 'NO DISPONIBLE'" : "SELECT TOP "+ in_ObtenerCantidadRegistrosBDD +" IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND IDENTIFICACION != 'NO DISPONIBLE'"</CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
     <ui:RetryScope DisplayName="Retry Scope - Consultar BDD" sap:VirtualizedContainerService.HintSize="492,586" sap2010:WorkflowViewState.IdRef="RetryScope_1">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
@@ -153,7 +169,7 @@
               </ui:ExecuteQuery.Parameters>
               <ui:ExecuteQuery.Sql>
                 <InArgument x:TypeArguments="x:String">
-                  <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20" xml:space="preserve">"SELECT TOP 5 IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE IDENTIFICACION != 'NO DISPONIBLE'"</CSharpValue>
+                  <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_24">strQueryBDD</CSharpValue>
                 </InArgument>
               </ui:ExecuteQuery.Sql>
             </ui:ExecuteQuery>
