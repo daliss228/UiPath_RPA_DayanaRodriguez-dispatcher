@@ -97,7 +97,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="UploadRecordsQueue" sap:VirtualizedContainerService.HintSize="1794.6666666666667,1545.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="UploadRecordsQueue" sap:VirtualizedContainerService.HintSize="1856.6666666666667,1545.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -106,39 +106,54 @@
     <ui:LogMessage DisplayName="Log Message - Cargando colas" sap:VirtualizedContainerService.HintSize="460,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">UiPath.Core.Activities.LogLevel.Trace</CSharpValue>
+          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">
+            <CSharpValue.Result>
+              <OutArgument x:TypeArguments="ui:LogLevel" />
+            </CSharpValue.Result>UiPath.Core.Activities.LogLevel.Trace</CSharpValue>
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">"Cargando transacciones en el orquestador..."</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">
+            <CSharpValue.Result>
+              <OutArgument x:TypeArguments="x:Object" />
+            </CSharpValue.Result>"Cargando transacciones en el orquestador..."</CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
     <Assign DisplayName="Assign - Referencia en transacción" sap:VirtualizedContainerService.HintSize="460,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">
-          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">in_dt_Clientes.Columns["IDENTIFICACION"].ColumnName</CSharpReference>
+          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">
+            <CSharpReference.Result>
+              <OutArgument x:TypeArguments="Location(x:String)" />
+            </CSharpReference.Result>in_dt_Clientes.Columns["IDENTIFICACION"].ColumnName</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">REFERENCE</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:RetryScope DisplayName="Retry Scope - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="460,947.3333333333334" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3" RetryInterval="00:00:05">
+    <ui:RetryScope ContinueOnError="{x:Null}" DisplayName="Retry Scope - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="460,947.3333333333334" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3" RetryInterval="00:00:05">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
           <TryCatch DisplayName="Try Catch - Agregar transacciones masivamente" sap:VirtualizedContainerService.HintSize="418,736.6666666666666" sap2010:WorkflowViewState.IdRef="TryCatch_1">
             <TryCatch.Try>
-              <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Bulk Add Queue Items - Registros Reporte Maestro" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1">
+              <ui:BulkAddQueueItems ContinueOnError="{x:Null}" DisplayName="Bulk Add Queue Items - Registros Reporte Maestro" FolderPath="{x:Null}" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1" Result="{x:Null}" TimeoutMS="{x:Null}">
                 <ui:BulkAddQueueItems.QueueItemsDataTable>
                   <InArgument x:TypeArguments="sd:DataTable">
-                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">in_dt_Clientes</CSharpValue>
+                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">
+                      <CSharpValue.Result>
+                        <OutArgument x:TypeArguments="sd:DataTable" />
+                      </CSharpValue.Result>in_dt_Clientes</CSharpValue>
                   </InArgument>
                 </ui:BulkAddQueueItems.QueueItemsDataTable>
                 <ui:BulkAddQueueItems.QueueName>
                   <InArgument x:TypeArguments="x:String">
-                    <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">in_Config["QueueName"].ToString()</CSharpValue>
+                    <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">
+                      <CSharpValue.Result>
+                        <OutArgument x:TypeArguments="x:String" />
+                      </CSharpValue.Result>in_Config["QueueName"].ToString()</CSharpValue>
                   </InArgument>
                 </ui:BulkAddQueueItems.QueueName>
                 <sap:WorkflowViewStateService.ViewState>
@@ -170,12 +185,18 @@
                     <ui:LogMessage DisplayName="Log Message - No se pudo agregar las colas" sap:VirtualizedContainerService.HintSize="382,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2">
                       <ui:LogMessage.Level>
                         <InArgument x:TypeArguments="ui:LogLevel">
-                          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">UiPath.Core.Activities.LogLevel.Error</CSharpValue>
+                          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">
+                            <CSharpValue.Result>
+                              <OutArgument x:TypeArguments="ui:LogLevel" />
+                            </CSharpValue.Result>UiPath.Core.Activities.LogLevel.Error</CSharpValue>
                         </InArgument>
                       </ui:LogMessage.Level>
                       <ui:LogMessage.Message>
                         <InArgument x:TypeArguments="x:Object">
-                          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">"No se pudo enviar los datos a las colas. " + exception.Message +". Fuente: "+ exception.Source</CSharpValue>
+                          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">
+                            <CSharpValue.Result>
+                              <OutArgument x:TypeArguments="x:Object" />
+                            </CSharpValue.Result>"No se pudo enviar los datos a las colas. " + exception.Message +". Fuente: "+ exception.Source</CSharpValue>
                         </InArgument>
                       </ui:LogMessage.Message>
                     </ui:LogMessage>
@@ -203,19 +224,28 @@
     <ui:ClearDataTable DisplayName="Clear Data Table - Limpiar tabla" sap:VirtualizedContainerService.HintSize="460,114" sap2010:WorkflowViewState.IdRef="ClearDataTable_1">
       <ui:ClearDataTable.DataTable>
         <InOutArgument x:TypeArguments="sd:DataTable">
-          <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">in_dt_Clientes</CSharpReference>
+          <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">
+            <CSharpReference.Result>
+              <OutArgument x:TypeArguments="Location(sd:DataTable)" />
+            </CSharpReference.Result>in_dt_Clientes</CSharpReference>
         </InOutArgument>
       </ui:ClearDataTable.DataTable>
     </ui:ClearDataTable>
     <ui:LogMessage DisplayName="Log Message - Transacciones cargadas en cola" sap:VirtualizedContainerService.HintSize="460,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_3">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">UiPath.Core.Activities.LogLevel.Info</CSharpValue>
+          <CSharpValue x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">
+            <CSharpValue.Result>
+              <OutArgument x:TypeArguments="ui:LogLevel" />
+            </CSharpValue.Result>UiPath.Core.Activities.LogLevel.Info</CSharpValue>
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">"Se ha cargado exitosamente las transacciones en la cola."</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">
+            <CSharpValue.Result>
+              <OutArgument x:TypeArguments="x:Object" />
+            </CSharpValue.Result>"Se ha cargado exitosamente las transacciones en la cola."</CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
