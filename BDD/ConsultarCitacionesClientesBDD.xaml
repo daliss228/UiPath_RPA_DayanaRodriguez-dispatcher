@@ -100,7 +100,7 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ConsultarCitacionesClientesBDD" sap:VirtualizedContainerService.HintSize="1856.6666666666667,1435.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ConsultarCitacionesClientesBDD" sap:VirtualizedContainerService.HintSize="1545.3333333333333,1436" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strQueryBDD" />
     </Sequence.Variables>
@@ -116,7 +116,7 @@
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <Assign DisplayName="Assign - Query BDD" sap:VirtualizedContainerService.HintSize="492,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="Assign - Query BDD" sap:VirtualizedContainerService.HintSize="492,118" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">
           <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">strQueryBDD</CSharpReference>
@@ -124,7 +124,9 @@
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">
-          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_26" xml:space="preserve">in_ObtenerCantidadRegistrosBDD == 0 ? "SELECT IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND IDENTIFICACION != 'NO DISPONIBLE'" : "SELECT TOP "+ in_ObtenerCantidadRegistrosBDD +" IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND IDENTIFICACION != 'NO DISPONIBLE'"</CSharpValue>
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_27" xml:space="preserve">in_ObtenerCantidadRegistrosBDD == 0 ? 
+"SELECT IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND (IDENTIFICACION != 'NO DISPONIBLE' OR IDENTIFICACION = 'NO VISIBLE')" : 
+"SELECT TOP "+ in_ObtenerCantidadRegistrosBDD +" IDENTIFICACION, TIPO_IDENTIFICACION, APELLIDOS, NOMBRES, CORREO_CLIENTE  FROM " + in_BDDTableNameAMT + " WHERE (TIPO_IDENTIFICACION = 'Cedula' OR TIPO_IDENTIFICACION = 'RUC') AND (IDENTIFICACION != 'NO DISPONIBLE' OR IDENTIFICACION = 'NO VISIBLE')"</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
