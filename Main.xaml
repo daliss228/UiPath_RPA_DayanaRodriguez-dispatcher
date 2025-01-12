@@ -101,7 +101,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="[Process title]&#xA;[Process description]&#xA;[Additional information (e.g., author, contact information and applications involved and required external setup)]" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="1874,807.6239999999999" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="[UiPath_RPA_DayanaRodriguez-dispatcher]&#xA;[Proceso dispatcher de citas AMT]&#xA;[Dayana Rodriguez]" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="1562.6666666666667,906.04" sap2010:WorkflowViewState.IdRef="StateMachine_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -220,7 +220,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Input data validation." DisplayName="Validation Data" sap:VirtualizedContainerService.HintSize="516.6666666666666,1494" sap2010:WorkflowViewState.IdRef="State_5">
+            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Input data validation." DisplayName="Validation Data" sap:VirtualizedContainerService.HintSize="210,91.33333333333333" sap2010:WorkflowViewState.IdRef="State_5">
               <State.Entry>
                 <TryCatch DisplayName="Try to validate data" sap:VirtualizedContainerService.HintSize="470,1063.3333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                   <TryCatch.Try>
